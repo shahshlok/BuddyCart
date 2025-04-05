@@ -13,6 +13,7 @@
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp"
@@ -32,7 +33,7 @@
             android:id="@+id/ivClose"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_close" />
+            android:src="@drawable/round_close_24" />
 
     </LinearLayout>
 
@@ -43,41 +44,61 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="110dp"
         android:clipToPadding="false"
+        android:fadeScrollbars="false"
         android:paddingBottom="8dp"
         android:scrollbars="vertical"
-        android:fadeScrollbars="false"
-        app:layout_constraintBottom_toTopOf="@id/divider"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        tools:layout_editor_absoluteX="16dp"
         tools:listitem="@layout/cart_item" />
 
     <!-- Divider -->
+
+    <!-- Bottom Section with Total and Checkout Button -->
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="#E0E0E0"
-        app:layout_constraintBottom_toTopOf="@id/bottomLayout" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvCartItems" />
 
-    <!-- Bottom Section with Total and Checkout Button -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <!-- Items Count Button -->
+
+        <!-- Total -->
+
+        <!-- Checkout Button -->
+
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:background="@drawable/rounded_gray_button"
             android:gravity="center"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp">
+            android:paddingVertical="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvItemsCount"
@@ -89,31 +110,39 @@
 
         </LinearLayout>
 
-        <!-- Total -->
         <TextView
             android:id="@+id/tvTotal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="31dp"
             android:text="Total: $123"
+            android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Checkout Button -->
         <Button
             android:id="@+id/btnCheckout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_green_button"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="19dp"
+            android:backgroundTint="#4CAF50"
             android:paddingHorizontal="24dp"
             android:paddingVertical="8dp"
             android:text="Checkout"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black" />
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTotal"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

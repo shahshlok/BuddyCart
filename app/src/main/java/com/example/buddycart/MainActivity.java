@@ -25,10 +25,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize Firebase Database
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        // Write a test message to the database
-        mDatabase.child("test").setValue("Hello, Firebase! again");
+        Intent intent = new Intent(this, CompleteCustomerDelivery.class);
+        startActivity(intent);
     }
 }

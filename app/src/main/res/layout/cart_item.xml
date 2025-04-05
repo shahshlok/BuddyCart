@@ -22,7 +22,7 @@
             android:id="@+id/tvItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Item that was added to the list"
+            android:text="Item Name"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
@@ -61,12 +61,12 @@
         <!-- Edit Button -->
         <Button
             android:id="@+id/btnEdit"
-            style="@style/Widget.AppCompat.Button.Small"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginEnd="8dp"
             android:text="Edit"
             android:textAllCaps="false"
+            android:textColor="@android:color/white"
             android:textSize="12sp" />
 
         <!-- Delete Button -->
@@ -75,9 +75,9 @@
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:text="Delete"
-            android:textSize="12sp"
             android:textAllCaps="false"
-            style="@style/Widget.AppCompat.Button.Small" />
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout> 

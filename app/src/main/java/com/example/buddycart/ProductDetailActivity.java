@@ -17,7 +17,6 @@ import androidx.core.view.WindowInsetsCompat;
 public class ProductDetailActivity extends AppCompatActivity {
 
     private ImageView ivProductImage;
-    private TextView tvTag;
     private TextView tvProductName;
     private TextView tvProductPrice;
     private TextView tvProductDescription;
@@ -53,7 +52,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void initViews() {
         ivProductImage = findViewById(R.id.ivProductImage);
-        tvTag = findViewById(R.id.tvTag);
+
         tvProductName = findViewById(R.id.tvProductName);
         tvProductPrice = findViewById(R.id.tvProductPrice);
         tvProductDescription = findViewById(R.id.tvProductDescription);
@@ -66,9 +65,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private void setProductDetails() {
         // Set product image - already set in the layout XML
         ivProductImage.setImageResource(R.mipmap.chocolate);
-        
-        // Set product tag - using string resource
-        tvTag.setText(getString(R.string.tag_best_seller));
+
         
         // Set product name
         tvProductName.setText(productName);

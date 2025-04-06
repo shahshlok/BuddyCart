@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         private TextView tvQuantity;
         private Button btnEdit;
         private Button btnDelete;
+        private ImageView imageView;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,27 +54,51 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            imageView = itemView.findViewById(R.id.imageView);
         }
 
         public void bind(CartItem item, int position) {
-            // Set the item details
             tvItemName.setText(item.getName());
             tvItemPrice.setText(item.getPrice());
             tvQuantity.setText(String.valueOf(item.getQuantity()));
             
-            // Setup click listeners for edit and delete buttons
+            // Configure ImageView to properly display the image
+            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            
+            int imageResource;
+            switch (position % 7) {
+                case 0:
+                    imageResource = R.mipmap.apple1;
+                    break;
+                case 1:
+                    imageResource = R.mipmap.banana;
+                    break;
+                case 2:
+                    imageResource = R.mipmap.bread;
+                    break;
+                case 3:
+                    imageResource = R.mipmap.milk;
+                    break;
+                case 4:
+                    imageResource = R.mipmap.cookies;
+                    break;
+                case 5:
+                    imageResource = R.mipmap.blueberries;
+                    break;
+                default:
+                    imageResource = R.mipmap.chocolate;
+                    break;
+            }
+            imageView.setImageResource(imageResource);
+            
             btnEdit.setOnClickListener(v -> {
                 Toast.makeText(v.getContext(), "Edit item: " + item.getName(), Toast.LENGTH_SHORT).show();
-                // Add your edit logic here
             });
             
             btnDelete.setOnClickListener(v -> {
                 Toast.makeText(v.getContext(), "Delete item: " + item.getName(), Toast.LENGTH_SHORT).show();
-                // Remove the item from the list
                 cartItems.remove(position);
-                // Notify the adapter that an item has been removed
                 notifyItemRemoved(position);
-                // Notify the adapter that all subsequent items have shifted positions
                 notifyItemRangeChanged(position, cartItems.size());
             });
         }

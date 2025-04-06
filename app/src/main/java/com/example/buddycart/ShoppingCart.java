@@ -71,13 +71,13 @@ public class ShoppingCart extends AppCompatActivity {
 
     private void createDummyData() {
         cartItems = new ArrayList<>();
-        cartItems.add(new CartItem("Item 1", "$10.99", 2));
-        cartItems.add(new CartItem("Item 2", "$5.99", 1));
-        cartItems.add(new CartItem("Item 3", "$7.50", 5));
-        cartItems.add(new CartItem("Item 4", "$12.99", 2));
-        cartItems.add(new CartItem("Item 5", "$3.99", 6));
-        cartItems.add(new CartItem("Item 6", "$9.99", 4));
-        cartItems.add(new CartItem("Item 7", "$15.99", 3));
+        cartItems.add(new CartItem("Apples", "$10.99", 2));
+        cartItems.add(new CartItem("Banana", "$5.99", 1));
+        cartItems.add(new CartItem("Bread", "$7.50", 5));
+        cartItems.add(new CartItem("Milk", "$12.99", 2));
+        cartItems.add(new CartItem("Cookies", "$3.99", 6));
+        cartItems.add(new CartItem("Blueberries", "$9.99", 4));
+        cartItems.add(new CartItem("Chocolate", "$15.99", 3));
     }
     
     private void updateCartSummary() {

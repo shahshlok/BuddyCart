@@ -12,7 +12,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    private DatabaseReference mDatabase;
     private Button btnGoToShoppingCart;
     private Button btnViewProduct;
 

@@ -49,8 +49,11 @@ public class ShoppingCart extends AppCompatActivity {
         // Setup RecyclerView
         rvCartItems.setLayoutManager(new LinearLayoutManager(this));
         
-        // Create dummy data
-        createDummyData();
+        // Create cart data
+        createCartData();
+        
+        // Check if there's a new product to add from ProductDetailActivity
+        handleProductAddition();
         
         // Setup adapter
         cartAdapter = new CartAdapter(cartItems);
@@ -69,15 +72,43 @@ public class ShoppingCart extends AppCompatActivity {
         });
     }
 
-    private void createDummyData() {
+    private void createCartData() {
         cartItems = new ArrayList<>();
-        cartItems.add(new CartItem("Apples", "$10.99", 2));
-        cartItems.add(new CartItem("Banana", "$5.99", 1));
-        cartItems.add(new CartItem("Bread", "$7.50", 5));
-        cartItems.add(new CartItem("Milk", "$12.99", 2));
+        // Only add 3 products to the cart (removing 4 from the original 7)
+        // Removed: Apple, Banana, Bread, Milk
         cartItems.add(new CartItem("Cookies", "$3.99", 6));
         cartItems.add(new CartItem("Blueberries", "$9.99", 4));
         cartItems.add(new CartItem("Chocolate", "$15.99", 3));
+    }
+    
+    private void handleProductAddition() {
+        // Check if we have product data from the ProductDetailActivity
+        if (getIntent().hasExtra("product_name") && 
+            getIntent().hasExtra("product_price") && 
+            getIntent().hasExtra("product_quantity")) {
+            
+            String productName = getIntent().getStringExtra("product_name");
+            String productPrice = getIntent().getStringExtra("product_price");
+            int productQuantity = getIntent().getIntExtra("product_quantity", 1);
+            
+            // Check if the product is already in the cart
+            boolean productFound = false;
+            for (CartItem item : cartItems) {
+                if (item.getName().equals(productName)) {
+                    // Update the existing item in cart
+                    productFound = true;
+                    // We would update the quantity here if CartItem had a setter
+                    // For now, we'll add it as a new item
+                    break;
+                }
+            }
+            
+            // If not in cart, add it
+            if (!productFound) {
+                cartItems.add(new CartItem(productName, productPrice, productQuantity));
+                Toast.makeText(this, productQuantity + " " + productName + " added to cart", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
     
     private void updateCartSummary() {

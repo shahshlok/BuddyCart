@@ -82,10 +82,13 @@ public class ShoppingCart extends AppCompatActivity {
     
     private void updateCartSummary() {
         int totalItems = 0;
+        double totalPrice = 0.0;
         for (CartItem item : cartItems) {
             totalItems += item.getQuantity();
+            double price = Double.parseDouble(item.getPrice().replace("$", ""));
+            totalPrice += price * item.getQuantity();
         }
         tvItemsCount.setText("Items: " + totalItems);
-        tvTotal.setText("Total: $123");
+        tvTotal.setText(String.format("Total: $%.2f", totalPrice));
     }
 }

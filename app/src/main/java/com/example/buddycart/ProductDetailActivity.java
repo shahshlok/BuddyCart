@@ -24,6 +24,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Button btnDecrease;
     private Button btnIncrease;
     private Button btnAddToCart;
+
+    private ImageView ivClose;
     
     private int quantity = 1;
     private String productName = "Chocolate";
@@ -48,6 +50,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         
         // Set up click listeners
         setupClickListeners();
+
+        // Set up close button
+        setupCloseButton();
     }
 
     private void initViews() {
@@ -64,7 +69,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void setProductDetails() {
         // Set product image - already set in the layout XML
-        ivProductImage.setImageResource(R.mipmap.chocolate);
+        ivProductImage.setImageResource(R.drawable.chocolate);
 
         
         // Set product name
@@ -119,5 +124,15 @@ public class ProductDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void setupCloseButton(){
+        ivClose = findViewById(R.id.ivCloseProduct);
+        ivClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                }
+            });
     }
 } 

@@ -8,19 +8,6 @@
     android:background="#F8F8F8"
     tools:context=".ProductDetailActivity">
 
-    <!-- Product Image at the top -->
-
-    <!-- Product Tag (Best Seller, Limited Item, etc.) -->
-
-    <!-- Product Name -->
-
-    <!-- Product Price -->
-
-    <!-- Product Description -->
-
-    <!-- Quantity Selector Section -->
-
-    <!-- Quantity Selection with - and + buttons -->
 
     <ImageView
         android:id="@+id/ivProductImage"
@@ -29,10 +16,10 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/chocolate"
+        android:src="@drawable/chocolate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/ivCloseProduct" />
 
     <TextView
         android:id="@+id/tvProductName"
@@ -155,7 +142,7 @@
         app:layout_constraintTop_toBottomOf="@+id/quantitySelector" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivCloseProduct"
         android:layout_width="59dp"
         android:layout_height="63dp"
         android:layout_marginTop="16dp"

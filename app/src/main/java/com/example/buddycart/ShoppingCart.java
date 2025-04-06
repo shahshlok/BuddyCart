@@ -15,14 +15,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList; // Add ArrayList import
 
 public class ShoppingCart extends AppCompatActivity {
 
     private RecyclerView rvCartItems;
     private CartAdapter cartAdapter;
-    private List<CartItem> cartItems;
+    private ArrayList<CartItem> cartItems; // Use ArrayList
+    
     private TextView tvItemsCount;
     private TextView tvTotal;
     private Button btnCheckout;
@@ -46,23 +46,19 @@ public class ShoppingCart extends AppCompatActivity {
         btnCheckout = findViewById(R.id.btnCheckout);
         ivClose = findViewById(R.id.ivClose);
 
-        // Setup RecyclerView
         rvCartItems.setLayoutManager(new LinearLayoutManager(this));
         
-        // Create cart data
         createCartData();
         
         // Check if there's a new product to add from ProductDetailActivity
         handleProductAddition();
         
         // Setup adapter
-        cartAdapter = new CartAdapter(cartItems);
+        cartAdapter = new CartAdapter(cartItems, this); // Pass ArrayList to adapter
         rvCartItems.setAdapter(cartAdapter);
         
-        // Update UI elements
         updateCartSummary();
         
-        // Setup click listeners
         btnCheckout.setOnClickListener(v -> {
             Toast.makeText(ShoppingCart.this, "Checkout clicked", Toast.LENGTH_SHORT).show();
         });
@@ -73,16 +69,16 @@ public class ShoppingCart extends AppCompatActivity {
     }
 
     private void createCartData() {
-        cartItems = new ArrayList<>();
-        // Only add 3 products to the cart (removing 4 from the original 7)
-        // Removed: Apple, Banana, Bread, Milk
-        cartItems.add(new CartItem("Cookies", "$3.99", 6));
-        cartItems.add(new CartItem("Blueberries", "$9.99", 4));
-        cartItems.add(new CartItem("Chocolate", "$15.99", 3));
+        cartItems = new ArrayList<>(); // Initialize ArrayList
+
+        // Add initial items to cart array
+        addToCart(new CartItem("Cookies", "$3.99", 6));
+        addToCart(new CartItem("Blueberries", "$9.99", 4));
+        addToCart(new CartItem("Chocolate", "$15.99", 3));
     }
     
     private void handleProductAddition() {
-        // Check if we have product data from the ProductDetailActivity
+
         if (getIntent().hasExtra("product_name") && 
             getIntent().hasExtra("product_price") && 
             getIntent().hasExtra("product_quantity")) {
@@ -95,30 +91,44 @@ public class ShoppingCart extends AppCompatActivity {
             boolean productFound = false;
             for (CartItem item : cartItems) {
                 if (item.getName().equals(productName)) {
-                    // Update the existing item in cart
                     productFound = true;
-                    // We would update the quantity here if CartItem had a setter
-                    // For now, we'll add it as a new item
                     break;
                 }
             }
             
             // If not in cart, add it
             if (!productFound) {
-                cartItems.add(new CartItem(productName, productPrice, productQuantity));
+                addToCart(new CartItem(productName, productPrice, productQuantity));
                 Toast.makeText(this, productQuantity + " " + productName + " added to cart", Toast.LENGTH_SHORT).show();
             }
         }
     }
     
+    private void addToCart(CartItem item) {
+        // Add item to ArrayList
+        cartItems.add(item);
+    }
+    
+
+    
+    public void removeFromCart(int position) {
+        if (position >= 0 && position < cartItems.size()) { // Add bounds check
+            cartItems.remove(position); 
+        }
+        
+        updateCartSummary();
+    }
+    
     private void updateCartSummary() {
         int totalItems = 0;
         double totalPrice = 0.0;
-        for (CartItem item : cartItems) {
+        
+        for (CartItem item : cartItems) { 
             totalItems += item.getQuantity();
             double price = Double.parseDouble(item.getPrice().replace("$", ""));
             totalPrice += price * item.getQuantity();
         }
+        
         tvItemsCount.setText("Items: " + totalItems);
         tvTotal.setText(String.format("Total: $%.2f", totalPrice));
     }

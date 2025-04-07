@@ -5,6 +5,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class OrderTrackingActivity extends AppCompatActivity implements OnMapRea
     private TextView tvBackToShopping, tvChatWithRider, tvEnableNotifications;
     private TextView tvWeGotYourOrder, tvEstimatedArrival, tvEditOrModify, tvGetHelp;
     private TextView tvSurveyPrompt, tvEmojiSad, tvEmojiNeutral, tvEmojiHappy;
+    private Button btnSwitchToDriver;
 
     private GoogleMap mMap;
     private String deliveryAddress;
@@ -45,6 +47,7 @@ public class OrderTrackingActivity extends AppCompatActivity implements OnMapRea
         tvBackToShopping = findViewById(R.id.tvBackToShopping);
         tvChatWithRider = findViewById(R.id.tvChatWithRider);
         tvEnableNotifications = findViewById(R.id.tvEnableNotifications);
+        btnSwitchToDriver = findViewById(R.id.btnSwitchToDriver);
 
         tvWeGotYourOrder = findViewById(R.id.tvWeGotYourOrder);
         tvEstimatedArrival = findViewById(R.id.tvEstimatedArrival);
@@ -100,6 +103,18 @@ public class OrderTrackingActivity extends AppCompatActivity implements OnMapRea
         });
         tvEmojiHappy.setOnClickListener(v -> {
             Toast.makeText(this, "Selected Happy 😊", Toast.LENGTH_SHORT).show();
+        });
+
+        // Set up driver view button click
+        btnSwitchToDriver.setOnClickListener(v -> {
+            Intent intent = new Intent(OrderTrackingActivity.this, CompleteCustomerDelivery.class);
+            // Pass all the data received from PaymentActivity
+            intent.putExtra("deliveryAddress", deliveryAddress);
+            intent.putExtra("deliveryInstructions", getIntent().getStringExtra("deliveryInstructions"));
+            intent.putExtra("phoneNumber", getIntent().getStringExtra("phoneNumber"));
+            intent.putExtra("orderSummary", getIntent().getStringExtra("orderSummary"));
+            intent.putExtra("orderTotal", getIntent().getStringExtra("orderTotal"));
+            startActivity(intent);
         });
     }
 

@@ -102,6 +102,19 @@
     </LinearLayout>
 
     <!-- Survey Section (Emoji or rating placeholders) -->
+    <Button
+        android:id="@+id/btnSwitchToDriver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Switch to Driver View"
+        android:layout_margin="16dp"
+        android:padding="12dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@id/surveyLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <LinearLayout
         android:id="@+id/surveyLayout"
         android:layout_width="411dp"

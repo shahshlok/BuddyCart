@@ -16,9 +16,12 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
     private List<CartItem> cartItems;
+    private ShoppingCart shoppingCart;
+
 
     public CartAdapter(List<CartItem> cartItems, ShoppingCart shoppingCart) {
         this.cartItems = cartItems;
+        this.shoppingCart = shoppingCart;
     }
 
     @NonNull
@@ -43,7 +46,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         private TextView tvItemName;
         private TextView tvItemPrice;
         private TextView tvQuantity;
-        private Button btnEdit;
         private Button btnDelete;
         private ImageView imageView;
 
@@ -52,7 +54,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvItemPrice = itemView.findViewById(R.id.tvItemPrice);
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
-            btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             imageView = itemView.findViewById(R.id.imageView);
         }
@@ -61,10 +62,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvItemName.setText(item.getName());
             tvItemPrice.setText(item.getPrice());
             tvQuantity.setText(String.valueOf(item.getQuantity()));
-            
-            // Configure ImageView to properly display the image
-            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            
+
             int imageResource;
             switch (position % 7) {
                 case 0:
@@ -91,13 +89,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             }
             imageView.setImageResource(imageResource);
             
-            btnEdit.setOnClickListener(v -> {
-                Toast.makeText(v.getContext(), "Edit item: " + item.getName(), Toast.LENGTH_SHORT).show();
-            });
-            
             btnDelete.setOnClickListener(v -> {
                 Toast.makeText(v.getContext(), "Delete item: " + item.getName(), Toast.LENGTH_SHORT).show();
-                cartItems.remove(position);
+                if(shoppingCart != null){
+                    shoppingCart.removeFromCart(position);
+                }
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, cartItems.size());
             });

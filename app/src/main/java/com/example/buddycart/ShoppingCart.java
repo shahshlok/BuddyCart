@@ -21,7 +21,7 @@ public class ShoppingCart extends AppCompatActivity {
 
     private RecyclerView rvCartItems;
     private CartAdapter cartAdapter;
-    private ArrayList<CartItem> cartItems; // Use ArrayList
+    private ArrayList<CartItem> cartItems;
     
     private TextView tvItemsCount;
     private TextView tvTotal;
@@ -39,7 +39,6 @@ public class ShoppingCart extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize views
         rvCartItems = findViewById(R.id.rvCartItems);
         tvItemsCount = findViewById(R.id.tvItemsCount);
         tvTotal = findViewById(R.id.tvTotal);
@@ -50,13 +49,11 @@ public class ShoppingCart extends AppCompatActivity {
         
         createCartData();
         
-        // Check if there's a new product to add from ProductDetailActivity
         handleProductAddition();
-        
-        // Setup adapter
-        cartAdapter = new CartAdapter(cartItems, this); // Pass ArrayList to adapter
+
+        cartAdapter = new CartAdapter(cartItems, this);
         rvCartItems.setAdapter(cartAdapter);
-        
+
         updateCartSummary();
         
         btnCheckout.setOnClickListener(v -> {
@@ -69,9 +66,8 @@ public class ShoppingCart extends AppCompatActivity {
     }
 
     private void createCartData() {
-        cartItems = new ArrayList<>(); // Initialize ArrayList
+        cartItems = new ArrayList<>();
 
-        // Add initial items to cart array
         addToCart(new CartItem("Cookies", "$3.99", 6));
         addToCart(new CartItem("Blueberries", "$9.99", 4));
         addToCart(new CartItem("Chocolate", "$15.99", 3));
@@ -86,8 +82,7 @@ public class ShoppingCart extends AppCompatActivity {
             String productName = getIntent().getStringExtra("product_name");
             String productPrice = getIntent().getStringExtra("product_price");
             int productQuantity = getIntent().getIntExtra("product_quantity", 1);
-            
-            // Check if the product is already in the cart
+
             boolean productFound = false;
             for (CartItem item : cartItems) {
                 if (item.getName().equals(productName)) {
@@ -96,7 +91,7 @@ public class ShoppingCart extends AppCompatActivity {
                 }
             }
             
-            // If not in cart, add it
+
             if (!productFound) {
                 addToCart(new CartItem(productName, productPrice, productQuantity));
                 Toast.makeText(this, productQuantity + " " + productName + " added to cart", Toast.LENGTH_SHORT).show();
@@ -105,14 +100,13 @@ public class ShoppingCart extends AppCompatActivity {
     }
     
     private void addToCart(CartItem item) {
-        // Add item to ArrayList
         cartItems.add(item);
     }
     
 
     
     public void removeFromCart(int position) {
-        if (position >= 0 && position < cartItems.size()) { // Add bounds check
+        if (position >= 0 && position < cartItems.size()) {
             cartItems.remove(position); 
         }
         

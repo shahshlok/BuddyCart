@@ -2,6 +2,8 @@ package com.example.buddycart;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-
-
 public class MainActivity extends AppCompatActivity {
+    private Button btnGoToShoppingCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,21 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Intent intent = new Intent(this, CompleteCustomerDelivery.class);
-        startActivity(intent);
+
+        // Initialize the button
+        btnGoToShoppingCart = findViewById(R.id.btnGoToShoppingCart);
+
+        // Set onClickListener for the button
+        if (btnGoToShoppingCart != null) {
+            btnGoToShoppingCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Start the ShoppingCart activity
+                    Intent intent = new Intent(MainActivity.this, ShoppingCart.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
     }
 }

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/paymentMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    tools:context=".PaymentActivity">
+
+    <!-- Header Layout (consistent with Shopping Cart) -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Back arrow icon -->
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/round_close_24"
+            android:contentDescription="Back" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payment"
+            android:textColor="#6A6AFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Scrollable Content with fillViewport enabled -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Deliver To Section -->
+            <TextView
+                android:id="@+id/tvDeliveryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deliver To"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/address1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Street Address" />
+
+            <EditText
+                android:id="@+id/address2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="City, Postal Code" />
+
+            <!-- New Fields: Delivery Instructions & Phone Number -->
+            <EditText
+                android:id="@+id/etDeliveryInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Delivery Instructions (e.g., leave at door)"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:layout_marginTop="8dp" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D3D3D3"
+                android:layout_marginVertical="16dp" />
+
+            <!-- Payment Methods Section -->
+            <TextView
+                android:id="@+id/tvPayWith"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pay With"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/paymentOptionsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <!-- Credit Card Option Header -->
+                <TextView
+                    android:id="@+id/tvPaymentCreditCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Credit Card"
+                    android:padding="12dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:textSize="16sp" />
+
+                <!-- Credit Card Details (initially hidden) -->
+                <LinearLayout
+                    android:id="@+id/llCreditCardDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="12dp">
+
+                    <EditText
+                        android:id="@+id/etCcNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Card Number"
+                        android:inputType="number"
+                        android:maxLength="16" />
+
+                    <EditText
+                        android:id="@+id/etCcExpiry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="MM/YY"
+                        android:inputType="text"
+                        android:maxLength="5" />
+
+                    <EditText
+                        android:id="@+id/etCcCvv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="CVV"
+                        android:inputType="numberPassword"
+                        android:maxLength="4" />
+                </LinearLayout>
+
+                <!-- Apple Pay Option Header -->
+                <TextView
+                    android:id="@+id/tvPaymentApplePay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Apple Pay"
+                    android:padding="12dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:textSize="16sp" />
+
+                <!-- Apple Pay Details (blank for now) -->
+                <LinearLayout
+                    android:id="@+id/llApplePayDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="12dp">
+                    <!-- Additional UI elements for Apple Pay can go here -->
+                </LinearLayout>
+
+                <!-- PayPal Option Header -->
+                <TextView
+                    android:id="@+id/tvPaymentPayPal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PayPal"
+                    android:padding="12dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:textSize="16sp" />
+
+                <!-- PayPal Details (blank for now) -->
+                <LinearLayout
+                    android:id="@+id/llPayPalDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="12dp">
+                    <!-- Additional UI elements for PayPal can go here -->
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D3D3D3"
+                android:layout_marginVertical="16dp" />
+
+            <!-- Summary Section -->
+            <TextView
+                android:id="@+id/tvSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Summary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/orderSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your order details will appear here."
+                android:textSize="18sp"
+                android:padding="12dp"
+                android:background="#F0F0F0"
+                android:layout_marginTop="8dp" />
+
+            <!-- Order Total Section -->
+            <TextView
+                android:id="@+id/tvOrderTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total: $0.00"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="12dp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Checkout Button -->
+            <Button
+                android:id="@+id/checkoutButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Checkout"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

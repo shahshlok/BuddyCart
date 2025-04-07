@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -15,7 +13,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,31 +57,40 @@ public class ShoppingCart extends AppCompatActivity {
         // Update UI elements
         updateCartSummary();
 
-        // Setup click listeners
+        // Setup checkout click listener
         btnCheckout.setOnClickListener(v -> {
-                // Build the summary string from the cart items
-                StringBuilder summaryBuilder = new StringBuilder();
-                for (CartItem item : cartItems) {
-                    double price = Double.parseDouble(item.getPrice().replace("$", ""));
-                    double subtotal = price * item.getQuantity();
-                    summaryBuilder.append(item.getName())
-                            .append(" (x")
-                            .append(item.getQuantity())
-                            .append(") - $")
-                            .append(String.format("%.2f", subtotal))
-                            .append("\n");
-                }
-                String summary = summaryBuilder.toString();
+            // Build order summary string
+            StringBuilder summaryBuilder = new StringBuilder();
+            for (CartItem item : cartItems) {
+                double price = Double.parseDouble(item.getPrice().replace("$", ""));
+                double subtotal = price * item.getQuantity();
+                summaryBuilder.append(item.getName())
+                        .append(" (x")
+                        .append(item.getQuantity())
+                        .append(") - $")
+                        .append(String.format("%.2f", subtotal))
+                        .append("\n");
+            }
+            String orderSummary = summaryBuilder.toString();
 
-                // Pass the summary to PaymentActivity
-                Intent intent = new Intent(ShoppingCart.this, PaymentActivity.class);
-                intent.putExtra("orderSummary", summary);
-                startActivity(intent);
-            });
+            // Calculate total price
+            int totalItems = 0;
+            double totalPrice = 0.0;
+            for (CartItem item : cartItems) {
+                totalItems += item.getQuantity();
+                double price = Double.parseDouble(item.getPrice().replace("$", ""));
+                totalPrice += price * item.getQuantity();
+            }
+            String totalString = "$" + String.format("%.2f", totalPrice);
 
-        ivClose.setOnClickListener(v -> {
-            finish();
+            // Launch PaymentActivity with extras
+            Intent intent = new Intent(ShoppingCart.this, PaymentActivity.class);
+            intent.putExtra("orderSummary", orderSummary);
+            intent.putExtra("orderTotal", totalString);
+            startActivity(intent);
         });
+
+        ivClose.setOnClickListener(v -> finish());
     }
 
     private void createDummyData() {

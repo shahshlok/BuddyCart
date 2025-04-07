@@ -28,8 +28,8 @@ public class PaymentActivity extends AppCompatActivity {
     private LinearLayout llCreditCardDetails, llApplePayDetails, llPayPalDetails;
     private EditText etCcNumber, etCcExpiry, etCcCvv;
 
-    // Summary and checkout
-    private TextView orderSummary;
+    // Order summary, total and checkout
+    private TextView orderSummary, tvOrderTotal;
     private Button checkoutButton;
 
     @Override
@@ -61,41 +61,39 @@ public class PaymentActivity extends AppCompatActivity {
         etCcExpiry = findViewById(R.id.etCcExpiry);
         etCcCvv = findViewById(R.id.etCcCvv);
 
-        // Toggle Credit Card details when its header is clicked
+        // Toggle Credit Card details on header click
         tvPaymentCreditCard.setOnClickListener(v -> {
-            if (llCreditCardDetails.getVisibility() == View.GONE) {
-                llCreditCardDetails.setVisibility(View.VISIBLE);
-            } else {
-                llCreditCardDetails.setVisibility(View.GONE);
-            }
+            llCreditCardDetails.setVisibility(
+                    llCreditCardDetails.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
         });
 
-        // Toggle Apple Pay details when its header is clicked
+        // Toggle Apple Pay details on header click
         tvPaymentApplePay.setOnClickListener(v -> {
-            if (llApplePayDetails.getVisibility() == View.GONE) {
-                llApplePayDetails.setVisibility(View.VISIBLE);
-            } else {
-                llApplePayDetails.setVisibility(View.GONE);
-            }
+            llApplePayDetails.setVisibility(
+                    llApplePayDetails.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
         });
 
-        // Toggle PayPal details when its header is clicked
+        // Toggle PayPal details on header click
         tvPaymentPayPal.setOnClickListener(v -> {
-            if (llPayPalDetails.getVisibility() == View.GONE) {
-                llPayPalDetails.setVisibility(View.VISIBLE);
-            } else {
-                llPayPalDetails.setVisibility(View.GONE);
-            }
+            llPayPalDetails.setVisibility(
+                    llPayPalDetails.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
         });
 
         // ===== SUMMARY & CHECKOUT =====
         orderSummary = findViewById(R.id.orderSummary);
+        tvOrderTotal = findViewById(R.id.tvOrderTotal);
         checkoutButton = findViewById(R.id.checkoutButton);
 
-        // Retrieve order summary passed from ShoppingCart (if available)
+        // Retrieve the order summary passed from ShoppingCart (if available)
         String summary = getIntent().getStringExtra("orderSummary");
         if (summary != null && !summary.isEmpty()) {
             orderSummary.setText(summary);
+        }
+
+        // Retrieve the order total passed from ShoppingCart (if available)
+        String orderTotal = getIntent().getStringExtra("orderTotal");
+        if (orderTotal != null && !orderTotal.isEmpty()) {
+            tvOrderTotal.setText("Total: " + orderTotal);
         }
 
         // Checkout button listener: process payment and navigate to OrderTrackingActivity
@@ -138,6 +136,7 @@ public class PaymentActivity extends AppCompatActivity {
             intent.putExtra("deliveryInstructions", deliveryInstr);
             intent.putExtra("phoneNumber", phoneNumber);
             intent.putExtra("orderSummary", orderSummary.getText().toString());
+            intent.putExtra("orderTotal", tvOrderTotal.getText().toString().replace("Total: ", ""));
             Log.d(TAG, "Launching OrderTrackingActivity with extras.");
             startActivity(intent);
         });

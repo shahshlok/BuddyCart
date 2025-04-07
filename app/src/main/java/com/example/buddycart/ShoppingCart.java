@@ -1,5 +1,6 @@
 package com.example.buddycart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,22 +49,39 @@ public class ShoppingCart extends AppCompatActivity {
 
         // Setup RecyclerView
         rvCartItems.setLayoutManager(new LinearLayoutManager(this));
-        
+
         // Create dummy data
         createDummyData();
-        
+
         // Setup adapter
         cartAdapter = new CartAdapter(cartItems);
         rvCartItems.setAdapter(cartAdapter);
-        
+
         // Update UI elements
         updateCartSummary();
-        
+
         // Setup click listeners
         btnCheckout.setOnClickListener(v -> {
-            Toast.makeText(ShoppingCart.this, "Checkout clicked", Toast.LENGTH_SHORT).show();
-        });
-        
+                // Build the summary string from the cart items
+                StringBuilder summaryBuilder = new StringBuilder();
+                for (CartItem item : cartItems) {
+                    double price = Double.parseDouble(item.getPrice().replace("$", ""));
+                    double subtotal = price * item.getQuantity();
+                    summaryBuilder.append(item.getName())
+                            .append(" (x")
+                            .append(item.getQuantity())
+                            .append(") - $")
+                            .append(String.format("%.2f", subtotal))
+                            .append("\n");
+                }
+                String summary = summaryBuilder.toString();
+
+                // Pass the summary to PaymentActivity
+                Intent intent = new Intent(ShoppingCart.this, PaymentActivity.class);
+                intent.putExtra("orderSummary", summary);
+                startActivity(intent);
+            });
+
         ivClose.setOnClickListener(v -> {
             finish();
         });
@@ -79,7 +97,7 @@ public class ShoppingCart extends AppCompatActivity {
         cartItems.add(new CartItem("Blueberries", "$9.99", 4));
         cartItems.add(new CartItem("Chocolate", "$15.99", 3));
     }
-    
+
     private void updateCartSummary() {
         int totalItems = 0;
         double totalPrice = 0.0;

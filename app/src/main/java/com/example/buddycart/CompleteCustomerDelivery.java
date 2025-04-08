@@ -1,7 +1,7 @@
 package com.example.buddycart;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+// import androidx.appcompat.app.AlertDialog; // No longer needed
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -33,6 +33,7 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
 
     private GoogleMap mMap;
     private TextView timeRemainingText;
+    private TextView orderItemsText; // Added for inline item display
     private CountDownTimer timer;
     
     // Variables to store real data from previous activities
@@ -42,7 +43,7 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
     private String orderSummary;
     private String orderTotal;
     private LatLng deliveryLocation;
-    private final int INITIAL_TIME_REMAINING = 600; // 10 minutes in seconds
+    private final int INITIAL_TIME_REMAINING = 600;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,8 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
         timeRemainingText = findViewById(R.id.timeRemaining);
         TextView deliveryToText = findViewById(R.id.deliveryTo);
         TextView instructionsText = findViewById(R.id.instructions);
-        Button confirmArrivalButton = findViewById(R.id.confirmArrivalButton);
+        // Button confirmArrivalButton = findViewById(R.id.confirmArrivalButton); // Variable not strictly needed here
+        orderItemsText = findViewById(R.id.orderItemsText); // Initialize the new TextView
 
         // Set real data
         deliveryToText.setText(String.format("Delivering to: %s", customerAddress));
@@ -144,10 +146,17 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
             }
         });
 
-        // Items button
+        // Items button - Now toggles inline TextView
         findViewById(R.id.itemsButton).setOnClickListener(v -> {
             if (orderSummary != null && !orderSummary.isEmpty()) {
-                showOrderItemsDialog();
+                if (orderItemsText.getVisibility() == View.VISIBLE) {
+                    // If already visible, hide it
+                    orderItemsText.setVisibility(View.GONE);
+                } else {
+                    // If hidden, set text and show it
+                    orderItemsText.setText(orderSummary);
+                    orderItemsText.setVisibility(View.VISIBLE);
+                }
             } else {
                 Toast.makeText(this, "Order details not available", Toast.LENGTH_SHORT).show();
             }
@@ -215,28 +224,7 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
         }
     }
 
-    private void showOrderItemsDialog() {
-        // Create the dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_order_items, null);
-        builder.setView(dialogView);
-
-        // Get references to views
-        TextView tvOrderItems = dialogView.findViewById(R.id.tvOrderItems);
-        Button btnClose = dialogView.findViewById(R.id.btnClose);
-
-        // Set the order items text
-        tvOrderItems.setText(orderSummary);
-
-        // Create and show the dialog
-        AlertDialog dialog = builder.create();
-        
-        // Set up close button
-        btnClose.setOnClickListener(v -> dialog.dismiss());
-
-        dialog.show();
-    }
-
+    // Removed showOrderItemsDialog() method as it's replaced by inline TextView
     @Override
     protected void onDestroy() {
         super.onDestroy();

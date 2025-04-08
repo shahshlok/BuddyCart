@@ -207,6 +207,18 @@
             android:textColor="#4B4BF7"
             android:layout_marginBottom="16dp" />
 
+        <!-- Order Items (Initially Hidden) -->
+        <TextView
+            android:id="@+id/orderItemsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp"
+            android:background="#EEEEEE"
+            android:textColor="#333333"
+            android:visibility="gone" />  <!-- Start hidden -->
+
         <Button
             android:id="@+id/confirmArrivalButton"
             android:layout_width="match_parent"

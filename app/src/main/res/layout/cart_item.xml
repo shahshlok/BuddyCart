@@ -54,7 +54,7 @@
 
     <LinearLayout
         android:id="@+id/llControlButtons"
-        android:layout_width="189dp"
+        android:layout_width="96dp"
         android:layout_height="35dp"
         android:layout_marginTop="3dp"
         android:orientation="horizontal"
@@ -66,17 +66,8 @@
         <!-- Delete Button -->
 
         <Button
-            android:id="@+id/btnEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="4dp"
-            android:text="Edit"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
-
-        <Button
             android:id="@+id/btnDelete"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Delete"
             android:textColor="@android:color/white"

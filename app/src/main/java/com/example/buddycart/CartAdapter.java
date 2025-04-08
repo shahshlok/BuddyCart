@@ -52,7 +52,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvItemPrice = itemView.findViewById(R.id.tvItemPrice);
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
-            btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             imageView = itemView.findViewById(R.id.imageView);
         }
@@ -61,10 +60,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvItemName.setText(item.getName());
             tvItemPrice.setText(item.getPrice());
             tvQuantity.setText(String.valueOf(item.getQuantity()));
-            
+
             // Configure ImageView to properly display the image
             imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            
+
             int imageResource;
             switch (position % 7) {
                 case 0:
@@ -90,11 +89,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     break;
             }
             imageView.setImageResource(imageResource);
-            
-            btnEdit.setOnClickListener(v -> {
-                Toast.makeText(v.getContext(), "Edit item: " + item.getName(), Toast.LENGTH_SHORT).show();
-            });
-            
+
+
+
             btnDelete.setOnClickListener(v -> {
                 Toast.makeText(v.getContext(), "Delete item: " + item.getName(), Toast.LENGTH_SHORT).show();
                 cartItems.remove(position);

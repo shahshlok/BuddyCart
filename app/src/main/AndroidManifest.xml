@@ -26,6 +26,12 @@
             android:name=".CompleteCustomerDelivery"
             android:exported="false" />
         <activity
+            android:name=".ShoppingCart"
+            android:exported="false" />
+        <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -35,20 +41,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShoppingCart"
-            android:exported="false" />
-        <activity
             android:name=".OrderTrackingActivity"
             android:exported="false" />
         <activity
             android:name=".PaymentActivity"
             android:exported="false" />
-        <activity
-            android:name=".ShoppingCart"
-            android:exported="false" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${mapsApiKey}" />
+
     </application>
 
 </manifest>

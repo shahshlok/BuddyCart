@@ -4,60 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Top Toolbar -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#333333">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/menuButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                android:padding="12dp"
-                android:src="@android:drawable/ic_menu_sort_by_size" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/notificationButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                android:padding="12dp"
-                android:src="@android:drawable/ic_popup_reminder" />
-
-            <ImageButton
-                android:id="@+id/shareButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                android:padding="12dp"
-                android:src="@android:drawable/ic_menu_share" />
-
-            <ImageButton
-                android:id="@+id/searchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                android:padding="12dp"
-                android:src="@android:drawable/ic_menu_search" />
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
 
     <!-- Map Fragment -->
     <androidx.fragment.app.FragmentContainerView
@@ -65,7 +11,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@id/toolbar" />
+        android:layout_alignParentTop="true" /> <!-- Changed layout_below to alignParentTop -->
 
     <!-- Bottom Section -->
     <LinearLayout

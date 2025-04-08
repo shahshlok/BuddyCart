@@ -1,9 +1,7 @@
 package com.example.buddycart;
 
 import androidx.annotation.NonNull;
-// import androidx.appcompat.app.AlertDialog; // No longer needed
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.location.Address;
@@ -58,13 +56,7 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
         orderSummary = intent.getStringExtra("orderSummary");
         orderTotal = intent.getStringExtra("orderTotal");
 
-        // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
-
+        // Toolbar setup code removed
         // Initialize map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -190,18 +182,7 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
             finish();
         });
 
-        // Toolbar buttons
-        findViewById(R.id.menuButton).setOnClickListener(v -> 
-            Toast.makeText(this, "Menu clicked", Toast.LENGTH_SHORT).show());
-        
-        findViewById(R.id.notificationButton).setOnClickListener(v -> 
-            Toast.makeText(this, "Notifications clicked", Toast.LENGTH_SHORT).show());
-        
-        findViewById(R.id.shareButton).setOnClickListener(v -> 
-            Toast.makeText(this, "Share clicked", Toast.LENGTH_SHORT).show());
-        
-        findViewById(R.id.searchButton).setOnClickListener(v -> 
-            Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show());
+        // Toolbar button listeners removed
     }
 
     @Override

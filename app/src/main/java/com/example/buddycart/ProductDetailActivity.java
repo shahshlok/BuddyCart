@@ -24,12 +24,13 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Button btnDecrease;
     private Button btnIncrease;
     private Button btnAddToCart;
-
     private ImageView ivClose;
     
     private int quantity = 1;
-    private String productName = "Chocolate";
-    private String productPrice = "$15.99";
+    private String productName;
+    private String productPrice;
+    private int productImage;
+    private String productDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,15 @@ public class ProductDetailActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Get product details from intent
+        Intent intent = getIntent();
+        if (intent != null) {
+            productName = intent.getStringExtra("product_name");
+            productPrice = intent.getStringExtra("product_price");
+            productImage = intent.getIntExtra("product_image", android.R.color.darker_gray);
+            productDescription = intent.getStringExtra("product_description");
+        }
 
         // Initialize views
         initViews();
@@ -57,7 +67,6 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void initViews() {
         ivProductImage = findViewById(R.id.ivProductImage);
-
         tvProductName = findViewById(R.id.tvProductName);
         tvProductPrice = findViewById(R.id.tvProductPrice);
         tvProductDescription = findViewById(R.id.tvProductDescription);
@@ -68,9 +77,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void setProductDetails() {
-        // Set product image - already set in the layout XML
-        ivProductImage.setImageResource(R.drawable.chocolate);
-
+        // Set product image
+        ivProductImage.setImageResource(productImage);
         
         // Set product name
         tvProductName.setText(productName);
@@ -79,7 +87,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         tvProductPrice.setText(productPrice);
         
         // Set product description
-        tvProductDescription.setText("Rich and creamy chocolate made from the finest cocoa beans. Perfect for snacking or baking your favorite desserts.");
+        tvProductDescription.setText(productDescription);
         
         // Set initial quantity
         tvQuantity.setText(String.valueOf(quantity));
@@ -89,50 +97,36 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
-        btnDecrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (quantity > 1) {
-                    quantity--;
-                    tvQuantity.setText(String.valueOf(quantity));
-                }
-            }
-        });
-
-        btnIncrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                quantity++;
+        btnDecrease.setOnClickListener(v -> {
+            if (quantity > 1) {
+                quantity--;
                 tvQuantity.setText(String.valueOf(quantity));
             }
         });
 
-        btnAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ProductDetailActivity.this, quantity + " " + productName + " added to cart", Toast.LENGTH_SHORT).show();
-                
-                // Create an intent to open the ShoppingCart activity
-                Intent intent = new Intent(ProductDetailActivity.this, ShoppingCart.class);
-                
-                // Pass the product details to the cart
-                intent.putExtra("product_name", productName);
-                intent.putExtra("product_price", productPrice);
-                intent.putExtra("product_quantity", quantity);
-                
-                // Start the ShoppingCart activity
-                startActivity(intent);
-            }
+        btnIncrease.setOnClickListener(v -> {
+            quantity++;
+            tvQuantity.setText(String.valueOf(quantity));
+        });
+
+        btnAddToCart.setOnClickListener(v -> {
+            Toast.makeText(ProductDetailActivity.this, quantity + " " + productName + " added to cart", Toast.LENGTH_SHORT).show();
+            
+            // Create an intent to open the ShoppingCart activity
+            Intent intent = new Intent(ProductDetailActivity.this, ShoppingCart.class);
+            
+            // Pass the product details to the cart
+            intent.putExtra("product_name", productName);
+            intent.putExtra("product_price", productPrice);
+            intent.putExtra("product_quantity", quantity);
+            
+            // Start the ShoppingCart activity
+            startActivity(intent);
         });
     }
 
-    public void setupCloseButton(){
+    public void setupCloseButton() {
         ivClose = findViewById(R.id.ivCloseProduct);
-        ivClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                }
-            });
+        ivClose.setOnClickListener(v -> finish());
     }
 } 

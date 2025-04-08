@@ -23,30 +23,40 @@
         android:theme="@style/Theme.BuddyCart"
         tools:targetApi="31">
         <activity
-            android:name=".CompleteCustomerDelivery"
-            android:exported="false" />
+            android:name=".StoreAActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BuddyCart" />
+        <activity
+            android:name=".StoreBActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BuddyCart" />
+        <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BuddyCart" />
+
         <activity
             android:name=".ShoppingCart"
             android:exported="false" />
         <activity
-            android:name=".ProductDetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.BuddyCart">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".OrderTrackingActivity"
             android:exported="false" />
         <activity
             android:name=".PaymentActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".CompleteCustomerDelivery"
+            android:exported="false" />
     </application>
 
 </manifest>

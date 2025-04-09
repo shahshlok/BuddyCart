@@ -2,14 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/paymentMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8"
-    tools:context=".PaymentActivity">
+    android:background="#F8F8F8">
 
-    <!-- Header Layout (consistent with Shopping Cart) -->
+    <!-- Header Layout -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -19,7 +17,6 @@
         android:paddingVertical="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Back arrow icon -->
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="24dp"
@@ -28,7 +25,6 @@
             android:src="@drawable/round_close_24"
             android:contentDescription="Back" />
 
-        <!-- Title -->
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
@@ -39,15 +35,16 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Scrollable Content with fillViewport enabled -->
+    <!-- Scrollable Content -->
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +52,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Deliver To Section -->
+            <!-- Delivery Section -->
             <TextView
                 android:id="@+id/tvDeliveryTitle"
                 android:layout_width="wrap_content"
@@ -76,7 +73,6 @@
                 android:layout_height="wrap_content"
                 android:hint="City, Postal Code" />
 
-            <!-- New Fields: Delivery Instructions & Phone Number -->
             <EditText
                 android:id="@+id/etDeliveryInstructions"
                 android:layout_width="match_parent"
@@ -84,12 +80,14 @@
                 android:hint="Delivery Instructions (e.g., leave at door)"
                 android:layout_marginTop="8dp" />
 
+            <!-- Phone Number input now limited to 10 digits -->
             <EditText
                 android:id="@+id/etPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number"
                 android:inputType="phone"
+                android:maxLength="10"
                 android:layout_marginTop="8dp" />
 
             <!-- Divider -->
@@ -133,29 +131,35 @@
                     android:visibility="gone"
                     android:padding="12dp">
 
+                    <!-- Card Number -->
                     <EditText
-                        android:id="@+id/etCcNumber"
+                        android:id="@+id/etCardNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Card Number"
+                        android:hint="Card Number (16 digits)"
                         android:inputType="number"
-                        android:maxLength="16" />
+                        android:maxLength="16"
+                        android:layout_marginBottom="8dp" />
 
+                    <!-- Expiry Date -->
                     <EditText
-                        android:id="@+id/etCcExpiry"
+                        android:id="@+id/etExpiryDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="MM/YY"
+                        android:hint="Expiry (MM/YY)"
                         android:inputType="text"
-                        android:maxLength="5" />
+                        android:maxLength="5"
+                        android:layout_marginBottom="8dp" />
 
+                    <!-- CVV -->
                     <EditText
-                        android:id="@+id/etCcCvv"
+                        android:id="@+id/etCvv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="CVV"
+                        android:hint="CVV (3 or 4 digits)"
                         android:inputType="numberPassword"
-                        android:maxLength="4" />
+                        android:maxLength="4"
+                        android:layout_marginBottom="16dp" />
                 </LinearLayout>
 
                 <!-- Apple Pay Option Header -->
@@ -246,6 +250,7 @@
                 android:textSize="16sp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

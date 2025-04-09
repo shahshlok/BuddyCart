@@ -3,7 +3,6 @@ package com.example.buddycart;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,9 +25,9 @@ public class PaymentActivity extends AppCompatActivity {
     // Payment method headers and details
     private TextView tvPaymentCreditCard, tvPaymentApplePay, tvPaymentPayPal;
     private LinearLayout llCreditCardDetails, llApplePayDetails, llPayPalDetails;
-    private EditText etCcNumber, etCcExpiry, etCcCvv;
+    private EditText etCardNumber, etExpiryDate, etCvv;
 
-    // Order summary, total and checkout
+    // Summary and checkout
     private TextView orderSummary, tvOrderTotal;
     private Button checkoutButton;
 
@@ -40,7 +39,7 @@ public class PaymentActivity extends AppCompatActivity {
         // ===== HEADER SETUP =====
         ivBack = findViewById(R.id.ivBack);
         tvTitle = findViewById(R.id.tvTitle);
-        ivBack.setOnClickListener(v -> finish());  // Back button returns to ShoppingCart
+        ivBack.setOnClickListener(v -> finish());  // Return to ShoppingCart
 
         // ===== DELIVERY FIELDS =====
         address1 = findViewById(R.id.address1);
@@ -48,7 +47,7 @@ public class PaymentActivity extends AppCompatActivity {
         etDeliveryInstructions = findViewById(R.id.etDeliveryInstructions);
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
 
-        // ===== PAYMENT METHODS =====
+        // ===== PAYMENT METHODS & DETAILS =====
         tvPaymentCreditCard = findViewById(R.id.tvPaymentCreditCard);
         llCreditCardDetails = findViewById(R.id.llCreditCardDetails);
         tvPaymentApplePay = findViewById(R.id.tvPaymentApplePay);
@@ -56,27 +55,25 @@ public class PaymentActivity extends AppCompatActivity {
         tvPaymentPayPal = findViewById(R.id.tvPaymentPayPal);
         llPayPalDetails = findViewById(R.id.llPayPalDetails);
 
-        // ===== CREDIT CARD FIELDS =====
-        etCcNumber = findViewById(R.id.etCcNumber);
-        etCcExpiry = findViewById(R.id.etCcExpiry);
-        etCcCvv = findViewById(R.id.etCcCvv);
+        // ===== CREDIT CARD FIELDS (with XML constraints) =====
+        etCardNumber = findViewById(R.id.etCardNumber);
+        etExpiryDate = findViewById(R.id.etExpiryDate);
+        etCvv = findViewById(R.id.etCvv);
 
-        // Toggle Credit Card details on header click
+        // Toggle Credit Card details
         tvPaymentCreditCard.setOnClickListener(v -> {
-            llCreditCardDetails.setVisibility(
-                    llCreditCardDetails.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+            llCreditCardDetails.setVisibility(llCreditCardDetails.getVisibility() == LinearLayout.GONE ?
+                    LinearLayout.VISIBLE : LinearLayout.GONE);
         });
-
-        // Toggle Apple Pay details on header click
+        // Toggle Apple Pay details
         tvPaymentApplePay.setOnClickListener(v -> {
-            llApplePayDetails.setVisibility(
-                    llApplePayDetails.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+            llApplePayDetails.setVisibility(llApplePayDetails.getVisibility() == LinearLayout.GONE ?
+                    LinearLayout.VISIBLE : LinearLayout.GONE);
         });
-
-        // Toggle PayPal details on header click
+        // Toggle PayPal details
         tvPaymentPayPal.setOnClickListener(v -> {
-            llPayPalDetails.setVisibility(
-                    llPayPalDetails.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+            llPayPalDetails.setVisibility(llPayPalDetails.getVisibility() == LinearLayout.GONE ?
+                    LinearLayout.VISIBLE : LinearLayout.GONE);
         });
 
         // ===== SUMMARY & CHECKOUT =====
@@ -84,38 +81,45 @@ public class PaymentActivity extends AppCompatActivity {
         tvOrderTotal = findViewById(R.id.tvOrderTotal);
         checkoutButton = findViewById(R.id.checkoutButton);
 
-        // Retrieve the order summary passed from ShoppingCart (if available)
+        // Retrieve order summary and total from intent extras (if available)
         String summary = getIntent().getStringExtra("orderSummary");
         if (summary != null && !summary.isEmpty()) {
             orderSummary.setText(summary);
         }
-
-        // Retrieve the order total passed from ShoppingCart (if available)
         String orderTotal = getIntent().getStringExtra("orderTotal");
         if (orderTotal != null && !orderTotal.isEmpty()) {
             tvOrderTotal.setText("Total: " + orderTotal);
         }
 
-        // Checkout button listener: process payment and navigate to OrderTrackingActivity
+        // Checkout button listener with runtime validation for credit card inputs and phone number
         checkoutButton.setOnClickListener(v -> {
             Log.d(TAG, "Checkout button pressed");
-            Toast.makeText(PaymentActivity.this, "Checkout button pressed", Toast.LENGTH_SHORT).show();
 
-            // Check if the Credit Card section is visible; if not, prompt the user.
-            if (llCreditCardDetails.getVisibility() != View.VISIBLE) {
-                llCreditCardDetails.setVisibility(View.VISIBLE);
+            // Ensure Credit Card details are visible; if not, prompt the user.
+            if (llCreditCardDetails.getVisibility() != LinearLayout.VISIBLE) {
+                llCreditCardDetails.setVisibility(LinearLayout.VISIBLE);
                 Toast.makeText(PaymentActivity.this, "Please fill in your credit card details", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Credit Card details section was not visible. Made it visible now.");
                 return;
             }
 
-            // Validate credit card fields
-            String ccNumber = etCcNumber.getText().toString().trim();
-            String ccExpiry = etCcExpiry.getText().toString().trim();
-            String ccCvv = etCcCvv.getText().toString().trim();
-            if (ccNumber.isEmpty() || ccExpiry.isEmpty() || ccCvv.isEmpty()) {
-                Toast.makeText(PaymentActivity.this, "Please fill in your credit card details", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Credit Card details validation failed");
+            // Validate credit card number (16 digits)
+            String cardNumber = etCardNumber.getText().toString().trim();
+            if (cardNumber.length() < 16) {
+                Toast.makeText(this, "Card number must be 16 digits", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Validate expiry date format (basic check: 5 characters with a slash)
+            String expiryDate = etExpiryDate.getText().toString().trim();
+            if (expiryDate.length() != 5 || !expiryDate.contains("/")) {
+                Toast.makeText(this, "Expiry date must be in MM/YY format", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Validate CVV (minimum 3 digits)
+            String cvv = etCvv.getText().toString().trim();
+            if (cvv.length() < 3) {
+                Toast.makeText(this, "CVV must be 3 or 4 digits", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -125,12 +129,16 @@ public class PaymentActivity extends AppCompatActivity {
             String deliveryInstr = etDeliveryInstructions.getText().toString().trim();
             String phoneNumber = etPhoneNumber.getText().toString().trim();
 
-            // Build full address string (adjust formatting as needed)
+            // Validate phone number: ensure it is not more than 10 digits
+            if (phoneNumber.length() > 10) {
+                Toast.makeText(this, "Phone number must not exceed 10 digits", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             String fullAddress = addressLine1 + ", " + addressLine2;
             Log.d(TAG, "Full address: " + fullAddress);
 
-            // Payment is considered processed successfully at this point.
-            // Launch OrderTrackingActivity, passing necessary information.
+            // Payment is processed; proceed to OrderTrackingActivity
             Intent intent = new Intent(PaymentActivity.this, OrderTrackingActivity.class);
             intent.putExtra("deliveryAddress", fullAddress);
             intent.putExtra("deliveryInstructions", deliveryInstr);

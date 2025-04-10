@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="#F8F8F8">
 
-    <!-- Header Layout -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -35,7 +34,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Scrollable Content -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -52,7 +50,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Delivery Section -->
             <TextView
                 android:id="@+id/tvDeliveryTitle"
                 android:layout_width="wrap_content"
@@ -80,7 +77,6 @@
                 android:hint="Delivery Instructions (e.g., leave at door)"
                 android:layout_marginTop="8dp" />
 
-            <!-- Phone Number input now limited to 10 digits -->
             <EditText
                 android:id="@+id/etPhoneNumber"
                 android:layout_width="match_parent"
@@ -90,14 +86,12 @@
                 android:maxLength="10"
                 android:layout_marginTop="8dp" />
 
-            <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#D3D3D3"
                 android:layout_marginVertical="16dp" />
 
-            <!-- Payment Methods Section -->
             <TextView
                 android:id="@+id/tvPayWith"
                 android:layout_width="wrap_content"
@@ -112,7 +106,6 @@
                 android:orientation="vertical"
                 android:layout_marginTop="8dp">
 
-                <!-- Credit Card Option Header -->
                 <TextView
                     android:id="@+id/tvPaymentCreditCard"
                     android:layout_width="match_parent"
@@ -122,7 +115,6 @@
                     android:background="?attr/selectableItemBackground"
                     android:textSize="16sp" />
 
-                <!-- Credit Card Details (initially hidden) -->
                 <LinearLayout
                     android:id="@+id/llCreditCardDetails"
                     android:layout_width="match_parent"
@@ -131,7 +123,6 @@
                     android:visibility="gone"
                     android:padding="12dp">
 
-                    <!-- Card Number -->
                     <EditText
                         android:id="@+id/etCardNumber"
                         android:layout_width="match_parent"
@@ -141,7 +132,6 @@
                         android:maxLength="16"
                         android:layout_marginBottom="8dp" />
 
-                    <!-- Expiry Date -->
                     <EditText
                         android:id="@+id/etExpiryDate"
                         android:layout_width="match_parent"
@@ -151,7 +141,6 @@
                         android:maxLength="5"
                         android:layout_marginBottom="8dp" />
 
-                    <!-- CVV -->
                     <EditText
                         android:id="@+id/etCvv"
                         android:layout_width="match_parent"
@@ -162,7 +151,6 @@
                         android:layout_marginBottom="16dp" />
                 </LinearLayout>
 
-                <!-- Apple Pay Option Header -->
                 <TextView
                     android:id="@+id/tvPaymentApplePay"
                     android:layout_width="match_parent"
@@ -172,7 +160,6 @@
                     android:background="?attr/selectableItemBackground"
                     android:textSize="16sp" />
 
-                <!-- Apple Pay Details (blank for now) -->
                 <LinearLayout
                     android:id="@+id/llApplePayDetails"
                     android:layout_width="match_parent"
@@ -180,10 +167,8 @@
                     android:orientation="vertical"
                     android:visibility="gone"
                     android:padding="12dp">
-                    <!-- Additional UI elements for Apple Pay can go here -->
                 </LinearLayout>
 
-                <!-- PayPal Option Header -->
                 <TextView
                     android:id="@+id/tvPaymentPayPal"
                     android:layout_width="match_parent"
@@ -193,7 +178,6 @@
                     android:background="?attr/selectableItemBackground"
                     android:textSize="16sp" />
 
-                <!-- PayPal Details (blank for now) -->
                 <LinearLayout
                     android:id="@+id/llPayPalDetails"
                     android:layout_width="match_parent"
@@ -201,18 +185,15 @@
                     android:orientation="vertical"
                     android:visibility="gone"
                     android:padding="12dp">
-                    <!-- Additional UI elements for PayPal can go here -->
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#D3D3D3"
                 android:layout_marginVertical="16dp" />
 
-            <!-- Summary Section -->
             <TextView
                 android:id="@+id/tvSummary"
                 android:layout_width="wrap_content"
@@ -230,7 +211,6 @@
                 android:background="#F0F0F0"
                 android:layout_marginTop="8dp" />
 
-            <!-- Order Total Section -->
             <TextView
                 android:id="@+id/tvOrderTotal"
                 android:layout_width="match_parent"
@@ -241,7 +221,6 @@
                 android:padding="12dp"
                 android:layout_marginTop="8dp" />
 
-            <!-- Checkout Button -->
             <Button
                 android:id="@+id/checkoutButton"
                 android:layout_width="match_parent"

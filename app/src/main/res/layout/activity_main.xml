@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="#F8F8F8">
 
-    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +31,6 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <!-- Stores Section -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,7 +41,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Walmart Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnStoreA"
                 android:layout_width="match_parent"
@@ -77,7 +74,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- NoFrills Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnStoreB"
                 android:layout_width="match_parent"

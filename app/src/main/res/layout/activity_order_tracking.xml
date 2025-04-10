@@ -9,7 +9,6 @@
     android:background="#FFFFFF"
     tools:context=".OrderTrackingActivity">
 
-    <!-- Top Header Bar -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -46,7 +45,6 @@
             android:textSize="14sp"/>
     </LinearLayout>
 
-    <!-- Map Fragment Container -->
     <FrameLayout
         android:id="@+id/mapFragmentContainer"
         android:layout_width="match_parent"
@@ -101,7 +99,6 @@
             android:textSize="14sp"/>
     </LinearLayout>
 
-    <!-- Survey Section (Emoji or rating placeholders) -->
     <Button
         android:id="@+id/btnSwitchToDriver"
         android:layout_width="match_parent"

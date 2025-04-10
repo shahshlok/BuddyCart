@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class OrderTrackingActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private TextView tvEditOrModify;
+    private TextView tvEditOrModify,btnSwitchToDriver;
     private GoogleMap mMap;
     private String deliveryAddress; // The address passed from PaymentActivity
 
@@ -57,6 +57,19 @@ public class OrderTrackingActivity extends AppCompatActivity implements OnMapRea
             fm.beginTransaction().replace(R.id.mapFragmentContainer, mapFragment).commit();
         }
         mapFragment.getMapAsync(this);
+
+        btnSwitchToDriver = findViewById(R.id.btnSwitchToDriver);
+        // Set up driver view button click
+        btnSwitchToDriver.setOnClickListener(v -> {
+            Intent intent = new Intent(OrderTrackingActivity.this, CompleteCustomerDelivery.class);
+            // Pass all the data received from PaymentActivity
+            intent.putExtra("deliveryAddress", deliveryAddress);
+            intent.putExtra("deliveryInstructions", getIntent().getStringExtra("deliveryInstructions"));
+            intent.putExtra("phoneNumber", getIntent().getStringExtra("phoneNumber"));
+            intent.putExtra("orderSummary", getIntent().getStringExtra("orderSummary"));
+            intent.putExtra("orderTotal", getIntent().getStringExtra("orderTotal"));
+            startActivity(intent);
+        });
     }
 
     @Override

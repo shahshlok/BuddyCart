@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="#F8F8F8">
 
-    <!-- Store Header -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -37,7 +36,6 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Search Bar -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +52,6 @@
             android:textSize="16sp" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Products RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

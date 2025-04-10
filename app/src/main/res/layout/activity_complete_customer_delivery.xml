@@ -5,7 +5,6 @@
     android:layout_height="match_parent">
 
 
-    <!-- Map Fragment -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -13,7 +12,6 @@
         android:layout_height="300dp"
         android:layout_alignParentTop="true" /> <!-- Changed layout_below to alignParentTop -->
 
-    <!-- Bottom Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +19,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Action Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,7 +115,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Delivery Info -->
         <TextView
             android:id="@+id/timeRemaining"
             android:layout_width="match_parent"
@@ -153,7 +149,6 @@
             android:textColor="#4B4BF7"
             android:layout_marginBottom="16dp" />
 
-        <!-- Order Items (Initially Hidden) -->
         <TextView
             android:id="@+id/orderItemsText"
             android:layout_width="match_parent"
@@ -161,9 +156,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:padding="8dp"
-            android:background="#EEEEEE"
-            android:textColor="#333333"
-            android:visibility="gone" />  <!-- Start hidden -->
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/confirmArrivalButton"

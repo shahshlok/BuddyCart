@@ -48,7 +48,6 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_customer_delivery);
 
-        // Get data from intent
         Intent intent = getIntent();
         customerAddress = intent.getStringExtra("deliveryAddress");
         customerPhone = intent.getStringExtra("phoneNumber");
@@ -56,32 +55,25 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
         orderSummary = intent.getStringExtra("orderSummary");
         orderTotal = intent.getStringExtra("orderTotal");
 
-        // Toolbar setup code removed
-        // Initialize map
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
 
-        // Initialize views
         timeRemainingText = findViewById(R.id.timeRemaining);
         TextView deliveryToText = findViewById(R.id.deliveryTo);
         TextView instructionsText = findViewById(R.id.instructions);
-        // Button confirmArrivalButton = findViewById(R.id.confirmArrivalButton); // Variable not strictly needed here
         orderItemsText = findViewById(R.id.orderItemsText); // Initialize the new TextView
 
-        // Set real data
         deliveryToText.setText(String.format("Delivering to: %s", customerAddress));
         instructionsText.setText(deliveryInstructions != null ? deliveryInstructions : "No special instructions provided");
 
-        // Setup countdown timer
         setupTimer();
 
-        // Setup button clicks
         setupButtonListeners();
 
-        // Geocode the address to get coordinates
         geocodeAddress();
     }
 
@@ -124,7 +116,6 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
     }
 
     private void setupButtonListeners() {
-        // Navigate button
         findViewById(R.id.navigateButton).setOnClickListener(v -> {
             if (deliveryLocation != null) {
                 String uri = "google.navigation:q=" + deliveryLocation.latitude + "," + deliveryLocation.longitude;
@@ -138,14 +129,11 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
             }
         });
 
-        // Items button - Now toggles inline TextView
         findViewById(R.id.itemsButton).setOnClickListener(v -> {
             if (orderSummary != null && !orderSummary.isEmpty()) {
                 if (orderItemsText.getVisibility() == View.VISIBLE) {
-                    // If already visible, hide it
                     orderItemsText.setVisibility(View.GONE);
                 } else {
-                    // If hidden, set text and show it
                     orderItemsText.setText(orderSummary);
                     orderItemsText.setVisibility(View.VISIBLE);
                 }
@@ -154,7 +142,6 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
             }
         });
 
-        // Call button
         findViewById(R.id.callButton).setOnClickListener(v -> {
             if (customerPhone != null && !customerPhone.isEmpty()) {
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
@@ -165,7 +152,6 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
             }
         });
 
-        // Message button
         findViewById(R.id.messageButton).setOnClickListener(v -> {
             if (customerPhone != null && !customerPhone.isEmpty()) {
                 Intent smsIntent = new Intent(Intent.ACTION_VIEW);
@@ -176,13 +162,11 @@ public class CompleteCustomerDelivery extends AppCompatActivity implements OnMap
             }
         });
 
-        // Confirm arrival button
         findViewById(R.id.confirmArrivalButton).setOnClickListener(v -> {
             Toast.makeText(this, "Delivery confirmed!", Toast.LENGTH_LONG).show();
             finish();
         });
 
-        // Toolbar button listeners removed
     }
 
     @Override

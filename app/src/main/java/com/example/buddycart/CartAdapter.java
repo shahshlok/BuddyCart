@@ -61,7 +61,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvItemPrice.setText(item.getPrice());
             tvQuantity.setText(String.valueOf(item.getQuantity()));
 
-            // Configure ImageView to properly display the image
             imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
             int imageResource;

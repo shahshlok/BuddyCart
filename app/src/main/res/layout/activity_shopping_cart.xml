@@ -36,7 +36,6 @@
 
     </LinearLayout>
 
-    <!-- Shopping Cart Items in a ScrollView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCartItems"
         android:layout_width="match_parent"

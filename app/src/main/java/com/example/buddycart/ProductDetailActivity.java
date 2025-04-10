@@ -43,7 +43,6 @@ public class ProductDetailActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Get product details from intent
         Intent intent = getIntent();
         if (intent != null) {
             productName = intent.getStringExtra("product_name");
@@ -52,16 +51,12 @@ public class ProductDetailActivity extends AppCompatActivity {
             productDescription = intent.getStringExtra("product_description");
         }
 
-        // Initialize views
         initViews();
         
-        // Set product details
         setProductDetails();
         
-        // Set up click listeners
         setupClickListeners();
 
-        // Set up close button
         setupCloseButton();
     }
 
@@ -77,22 +72,16 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void setProductDetails() {
-        // Set product image
         ivProductImage.setImageResource(productImage);
         
-        // Set product name
         tvProductName.setText(productName);
         
-        // Set product price
         tvProductPrice.setText(productPrice);
         
-        // Set product description
         tvProductDescription.setText(productDescription);
         
-        // Set initial quantity
         tvQuantity.setText(String.valueOf(quantity));
         
-        // Set the add to cart button text
         btnAddToCart.setText(getString(R.string.add_to_cart));
     }
 
@@ -112,15 +101,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnAddToCart.setOnClickListener(v -> {
             Toast.makeText(ProductDetailActivity.this, quantity + " " + productName + " added to cart", Toast.LENGTH_SHORT).show();
             
-            // Create an intent to open the ShoppingCart activity
             Intent intent = new Intent(ProductDetailActivity.this, ShoppingCart.class);
             
-            // Pass the product details to the cart
             intent.putExtra("product_name", productName);
             intent.putExtra("product_price", productPrice);
             intent.putExtra("product_quantity", quantity);
             
-            // Start the ShoppingCart activity
             startActivity(intent);
         });
     }

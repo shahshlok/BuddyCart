@@ -37,29 +37,22 @@ public class ShoppingCart extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize views
         rvCartItems = findViewById(R.id.rvCartItems);
         tvItemsCount = findViewById(R.id.tvItemsCount);
         tvTotal = findViewById(R.id.tvTotal);
         btnCheckout = findViewById(R.id.btnCheckout);
         ivClose = findViewById(R.id.ivClose);
 
-        // Setup RecyclerView
         rvCartItems.setLayoutManager(new LinearLayoutManager(this));
 
-        // Create dummy data
         createDummyData();
 
-        // Setup adapter
         cartAdapter = new CartAdapter(cartItems);
         rvCartItems.setAdapter(cartAdapter);
 
-        // Update UI elements
         updateCartSummary();
 
-        // Setup checkout click listener
         btnCheckout.setOnClickListener(v -> {
-            // Build order summary string
             StringBuilder summaryBuilder = new StringBuilder();
             for (CartItem item : cartItems) {
                 double price = Double.parseDouble(item.getPrice().replace("$", ""));
@@ -73,7 +66,6 @@ public class ShoppingCart extends AppCompatActivity {
             }
             String orderSummary = summaryBuilder.toString();
 
-            // Calculate total price
             int totalItems = 0;
             double totalPrice = 0.0;
             for (CartItem item : cartItems) {
@@ -83,7 +75,6 @@ public class ShoppingCart extends AppCompatActivity {
             }
             String totalString = "$" + String.format("%.2f", totalPrice);
 
-            // Launch PaymentActivity with extras
             Intent intent = new Intent(ShoppingCart.this, PaymentActivity.class);
             intent.putExtra("orderSummary", orderSummary);
             intent.putExtra("orderTotal", totalString);

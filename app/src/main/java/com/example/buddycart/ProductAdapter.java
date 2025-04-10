@@ -57,7 +57,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             tvProductPrice.setText(String.format(Locale.getDefault(), "$%.2f", product.getPrice()));
             ivProductImage.setImageResource(product.getImageResource());
 
-            // Set click listener for the entire item to open product details
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), ProductDetailActivity.class);
                 intent.putExtra("product_name", product.getName());
@@ -67,7 +66,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 v.getContext().startActivity(intent);
             });
 
-            // Set click listener for the Add to Cart button
             btnAddToCart.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), ShoppingCart.class);
                 intent.putExtra("product_name", product.getName());

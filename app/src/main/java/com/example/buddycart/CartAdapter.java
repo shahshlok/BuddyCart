@@ -16,12 +16,9 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
     private List<CartItem> cartItems;
-    private ShoppingCart shoppingCart;
 
-
-    public CartAdapter(List<CartItem> cartItems, ShoppingCart shoppingCart) {
+    public CartAdapter(List<CartItem> cartItems) {
         this.cartItems = cartItems;
-        this.shoppingCart = shoppingCart;
     }
 
     @NonNull
@@ -46,6 +43,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         private TextView tvItemName;
         private TextView tvItemPrice;
         private TextView tvQuantity;
+        private Button btnEdit;
         private Button btnDelete;
         private ImageView imageView;
 
@@ -62,6 +60,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvItemName.setText(item.getName());
             tvItemPrice.setText(item.getPrice());
             tvQuantity.setText(String.valueOf(item.getQuantity()));
+
+            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
             int imageResource;
             switch (position % 7) {
@@ -88,12 +88,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     break;
             }
             imageView.setImageResource(imageResource);
-            
+
+
+
             btnDelete.setOnClickListener(v -> {
                 Toast.makeText(v.getContext(), "Delete item: " + item.getName(), Toast.LENGTH_SHORT).show();
-                if(shoppingCart != null){
-                    shoppingCart.removeFromCart(position);
-                }
+                cartItems.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, cartItems.size());
             });

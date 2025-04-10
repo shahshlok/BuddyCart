@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/orderTrackingRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".OrderTrackingActivity">
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvBackToShopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back to Shopping"
+            android:textColor="#6A6AFF"
+            android:textSize="14sp"
+            android:paddingEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/tvChatWithRider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:text="Chat with the Rider"
+            android:textColor="#6A6AFF"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvEnableNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Notifications"
+            android:textColor="#6A6AFF"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/mapFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Delivery Status + Estimated Arrival -->
+    <LinearLayout
+        android:id="@+id/statusLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/mapFragmentContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvWeGotYourOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We Got Your Order"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tvEstimatedArrival"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estimated Arrival 19:02"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvEditOrModify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit or Modify your Order"
+            android:textColor="#6A6AFF"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tvGetHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Help or Talk to Customer Service"
+            android:textColor="#6A6AFF"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSwitchToDriver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Switch to Driver View"
+        android:layout_margin="16dp"
+        android:padding="12dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@id/surveyLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/surveyLayout"
+        android:layout_width="411dp"
+        android:layout_height="122dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statusLayout"
+        app:layout_constraintVertical_bias="0.668">
+
+        <TextView
+            android:id="@+id/tvSurveyPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="How was your experience with us?"
+            android:textSize="16sp" />
+
+        <!-- Example emojis or rating icons -->
+
+        <TextView
+            android:id="@+id/tvEmojiSad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="😞"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvEmojiNeutral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="😐"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvEmojiHappy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="😊"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

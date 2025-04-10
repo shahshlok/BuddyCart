@@ -8,7 +8,6 @@
     android:background="#F8F8F8"
     tools:context=".ShoppingCart">
 
-    <!-- Header with Title and Close Button -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -54,9 +53,7 @@
         tools:layout_editor_absoluteX="16dp"
         tools:listitem="@layout/cart_item" />
 
-    <!-- Divider -->
 
-    <!-- Bottom Section with Total and Checkout Button -->
 
     <View
         android:id="@+id/divider"
@@ -81,11 +78,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Items Count Button -->
-
-        <!-- Total -->
-
-        <!-- Checkout Button -->
 
         <LinearLayout
             android:id="@+id/linearLayout"

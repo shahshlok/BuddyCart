@@ -123,7 +123,6 @@
             tools:layout_editor_absoluteX="275dp" />
     </LinearLayout>
 
-    <!-- Add to Cart Button -->
     <Button
         android:id="@+id/btnAddToCart"
         android:layout_width="361dp"
